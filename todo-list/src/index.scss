@@ -1,0 +1,65 @@
+body {
+  margin: 0;
+  font-family:sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 500;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.list{
+  margin-left: 5rem;
+}
+.card{
+  background-color: #eee;
+  display: block;
+  width: 15rem;
+  height: 5rem;
+  box-shadow: 0 2px 3px 2px #0003;
+  border-radius: 10%;
+  padding: 2rem 3rem 5rem 3rem;
+}
+.actions{
+  display: flex;
+  justify-content: flex-end;
+}
+.btn{
+  color: #eee;
+  margin-top: 1.5rem;
+  display: inline-block;
+  font-size: 1.2rem;
+  background-color: #800080;
+  border: none;
+  padding: .5rem 1.5rem;
+  border: 2px #500050 solid;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 1rem;
+}
+.modal{
+  display: inline-block;
+  position: fixed;
+  top: 50vh;
+  left: 50vw;
+  transform: translate(-50%, -50%);
+  background-color: #eee;
+  padding: 2rem 3rem;
+  border: 2px solid #800080;
+  box-shadow: 0 4px 2px 2px #0003;
+  z-index: 100;
+}
+.background{
+  position: fixed;
+  display: block;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #0008;
+  backdrop-filter:blur(5px);
+  z-index: 10;
+}
