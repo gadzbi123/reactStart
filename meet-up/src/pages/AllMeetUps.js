@@ -22,6 +22,15 @@ const DUMMY_DATA = [
 ];
 
 function AllMeetUpsPage(props) {
+  // await fetch(
+  //   "https://react-start-app-3ce36-default-rtdb.firebaseio.com/meetups.json"
+  // );
+  const getLocal = () => {
+    const data = localStorage.getItem("meetups");
+    JSON.parse(data).then((data) => {
+      console.log(data);
+    });
+  };
   return (
     <section>
       <MeetUpList meetups={DUMMY_DATA} />
