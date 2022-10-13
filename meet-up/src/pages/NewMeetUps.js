@@ -1,7 +1,9 @@
 import { useNavigate } from "react-router-dom";
+
 import NewMeetUpForm from "../components/meetups/NewMeetupForm";
+
 function NewMeetUpsPage(props) {
-  const history = useNavigate();
+  const navigate = useNavigate();
   function MeetUpFireBaseHandler(meetUpData) {
     fetch(
       "https://react-start-app-3ce36-default-rtdb.firebaseio.com/meetups.json",
@@ -13,17 +15,17 @@ function NewMeetUpsPage(props) {
         },
       }
     ).then(() => {
-      history.replace("/");
+      navigate("/");
     });
   }
-  function MeetUpLocalHandler(meetUpData) {
-    localStorage.setItem("meetups", JSON.stringify(meetUpData));
-    history.replace("/");
-  }
+  // function MeetUpLocalHandler(meetUpData) {
+  //   localStorage.setItem("meetups", JSON.stringify(meetUpData));
+  //   history.replace("/");
+  // }
   return (
     <section>
       <h1>MeetUps Form</h1>
-      <NewMeetUpForm onAddMeetup={MeetUpLocalHandler} />
+      <NewMeetUpForm onAddMeetup={MeetUpFireBaseHandler} />
     </section>
   );
 }

@@ -1,39 +1,39 @@
+import { useEffect, useState } from "react";
 import MeetUpList from "../components/meetups/MeetUpList";
 
-const DUMMY_DATA = [
-  {
-    id: "m1",
-    title: "This is a first meetup",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Stadtbild_M%C3%BCnchen.jpg/2560px-Stadtbild_M%C3%BCnchen.jpg",
-    address: "Meetupstreet 5, 12345 Meetup City",
-    description:
-      "This is a first, amazing meetup which you definitely should not miss. It will be a lot of fun!",
-  },
-  {
-    id: "m2",
-    title: "This is a second meetup",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Stadtbild_M%C3%BCnchen.jpg/2560px-Stadtbild_M%C3%BCnchen.jpg",
-    address: "Meetupstreet 5, 12345 Meetup City",
-    description:
-      "This is a first, amazing meetup which you definitely should not miss. It will be a lot of fun!",
-  },
-];
-
 function AllMeetUpsPage(props) {
-  // await fetch(
-  //   "https://react-start-app-3ce36-default-rtdb.firebaseio.com/meetups.json"
-  // );
-  const getLocal = () => {
-    const data = localStorage.getItem("meetups");
-    JSON.parse(data).then((data) => {
-      console.log(data);
-    });
-  };
+  const [isLoading, setIsLoading] = useState(true);
+  const [content, setContent] = useState([]);
+
+  // with EMPTY it will run constantly,
+  // with [] it will only execute when the component is loaded,
+  // with [condition] it will run only when condition has changed
+  useEffect(() => {
+    setIsLoading(true);
+    fetch(
+      "https://react-start-app-3ce36-default-rtdb.firebaseio.com/meetups.json"
+    )
+      .then((promise) => {
+        return promise.json();
+      })
+      .then((data) => {
+        data = Object.values(data);
+        setIsLoading(false);
+        setContent(data);
+      });
+  }, []);
+
+  if (isLoading) {
+    return (
+      <section>
+        <p>Loading...</p>
+      </section>
+    );
+  }
+
   return (
     <section>
-      <MeetUpList meetups={DUMMY_DATA} />
+      <MeetUpList meetups={content} />
     </section>
   );
 }
